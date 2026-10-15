@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { margin:0; font-family: system-ui, sans-serif; background:#fff; color:#111; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; padding:16px; }
+  .card { border:1px solid #e5e5e5; border-radius:12px; padding:18px; text-align:center; }
+  .num { font-size:2.2rem; font-weight:700; }
+  .label { font-size:.85rem; color:#666; margin-top:4px; }
+</style>
+</head>
+<body>
+<div class="grid">
+<div class="card"><div class="num" data-target="40">0</div><div class="label">Entregas totais</div></div>
+  <div class="card"><div class="num" data-target="20">0</div><div class="label">Projetos</div></div>
+  <div class="card"><div class="num" data-target="10">0</div><div class="label">Setores atendidos</div></div>
+  <div class="card"><div class="num" data-target="25">0</div><div class="label">Eventos cobertos</div></div>
+  <div class="card"><div class="num" data-target="5">0</div><div class="label">Transmissões ao vivo</div></div>
+</div>
+<script>
+  document.querySelectorAll('.num').forEach(el => {
+    const target = +el.dataset.target;
+    let n = 0;
+    const step = Math.max(1, Math.ceil(target / 40));
+    const t = setInterval(() => {
+      n = Math.min(n + step, target);
+      el.textContent = (n === target ? '+' : '') + n;
+      if (n === target) clearInterval(t);
+    }, 30);
+  });
+</script>
+</body>
+</html>
